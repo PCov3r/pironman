@@ -218,7 +218,7 @@ except Exception as e:
 power_key_ok = False
 
 try:
-    power_key = InputDevice(power_key_pin, pull_up=False)
+    power_key = InputDevice(power_key_pin, pull_up=True)
     power_key_ok = True
     log('power_key init success')
 except Exception as e:
@@ -488,6 +488,7 @@ if __name__ == "__main__":
         log(f'error\n {e}')
     finally:
         exit_handler()
+
 
 
 
