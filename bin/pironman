@@ -397,6 +397,24 @@ while [[ $# -gt 0 ]]; do
           # restart program
           shift 2
           ;;
+        pcm18|PCM18|18)
+          echo "set rgb io to pin 18 (pcm clk)"
+          # set io
+          change_config ".*rgb_pin\s*=.*"  "rgb_pin = 18" ${CONF}
+          #
+          if [[ $boot_config != "" ]]; then
+            echo "boot_config: ${boot_config}"
+              ## enable audio
+            change_config ".*dtparam=audio=.*" "dtparam=audio=on" ${boot_config}
+            # disable i2s
+            change_config ".*dtoverlay=hifiberry-dac$" "#dtoverlay=hifiberry-dac" ${boot_config}
+            change_config ".*dtoverlay=i2s-mmap$" "#dtoverlay=i2s-mmap" ${boot_config}
+            # whether reboot to make changes take effect
+            want_reboot
+          fi
+          # restart program
+          shift 2
+          ;;
         *)
           echo "usage: pironman -rp|--rgb_pin [10 / spi / 12 / pwm / 21 / pcm]"
           exit 1
