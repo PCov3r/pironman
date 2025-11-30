@@ -416,7 +416,7 @@ while [[ $# -gt 0 ]]; do
           shift 2
           ;;
         *)
-          echo "usage: pironman -rp|--rgb_pin [10 / spi / 12 / pwm / 21 / pcm]"
+          echo "usage: pironman -rp|--rgb_pin [10 / spi / 12 / pwm / 21 / pcm / 18 / pcm18]"
           exit 1
           ;;
       esac
