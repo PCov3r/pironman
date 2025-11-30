@@ -60,8 +60,8 @@ if status == 0:
 # read config
 # =================================================================
 power_key_pin = 16
-fan_pin = 6
-rgb_pin = 10
+fan_pin = 14
+rgb_pin = 18
 update_frequency = 0.5  # second
 
 temp_unit = 'C' # 'C' or 'F'
@@ -488,5 +488,6 @@ if __name__ == "__main__":
         log(f'error\n {e}')
     finally:
         exit_handler()
+
 
 
