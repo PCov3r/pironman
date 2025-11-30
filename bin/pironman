@@ -397,18 +397,15 @@ while [[ $# -gt 0 ]]; do
           # restart program
           shift 2
           ;;
-        pcm18|PCM18|18)
+        pwm18|PWM18|18)
           echo "set rgb io to pin 18 (pcm clk)"
           # set io
           change_config ".*rgb_pin\s*=.*"  "rgb_pin = 18" ${CONF}
           #
           if [[ $boot_config != "" ]]; then
             echo "boot_config: ${boot_config}"
-              ## enable audio
-            change_config ".*dtparam=audio=.*" "dtparam=audio=on" ${boot_config}
-            # disable i2s
-            change_config ".*dtoverlay=hifiberry-dac$" "#dtoverlay=hifiberry-dac" ${boot_config}
-            change_config ".*dtoverlay=i2s-mmap$" "#dtoverlay=i2s-mmap" ${boot_config}
+            # disable audio
+            change_config ".*dtparam=audio=.*" "dtparam=audio=off" ${boot_config}
             # whether reboot to make changes take effect
             want_reboot
           fi
@@ -416,7 +413,7 @@ while [[ $# -gt 0 ]]; do
           shift 2
           ;;
         *)
-          echo "usage: pironman -rp|--rgb_pin [10 / spi / 12 / pwm / 21 / pcm / 18 / pcm18]"
+          echo "usage: pironman -rp|--rgb_pin [10 / spi / 12 / pwm / 21 / pcm / 18 / pwm18]"
           exit 1
           ;;
       esac
