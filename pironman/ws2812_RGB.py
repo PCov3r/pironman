@@ -51,7 +51,7 @@ class WS2812():
         LED_PIN,
         LED_BRIGHTNESS=255,
         LED_FREQ_HZ=1000000,
-        LED_DMA=10,
+        LED_DMA=5,
         LED_INVERT=False,
     ):
         self.led_count = LED_COUNT
