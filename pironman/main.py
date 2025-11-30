@@ -4,7 +4,7 @@ import time
 import threading
 import signal
 
-from gpiozero import InputDevice
+from gpiozero import InputDevice, DigitalInputDevice
 from gpiozero import DigitalOutputDevice as Fan
 
 from configparser import ConfigParser
@@ -218,7 +218,7 @@ except Exception as e:
 power_key_ok = False
 
 try:
-    power_key = InputDevice(power_key_pin, pull_up=True)
+    power_key = DigitalInputDevice(power_key_pin, pull_up=True, bounce_time=0.1)
     power_key_ok = True
     log('power_key init success')
 except Exception as e:
@@ -488,6 +488,7 @@ if __name__ == "__main__":
         log(f'error\n {e}')
     finally:
         exit_handler()
+
 
 
 
