@@ -424,6 +424,7 @@ def main():
             oled.on()
         else:
             if power_key.value == 0:
+                log("POWERKEY IS 0")
                 # screen on
                 if oled_ok and oled_stat == False:
                     oled.on()
@@ -488,6 +489,7 @@ if __name__ == "__main__":
         log(f'error\n {e}')
     finally:
         exit_handler()
+
 
 
 
