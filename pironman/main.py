@@ -4,7 +4,7 @@ import time
 import threading
 import signal
 
-from gpiozero import InputDevice, DigitalInputDevice
+from gpiozero import InputDevice, Button
 from gpiozero import DigitalOutputDevice as Fan
 
 from configparser import ConfigParser
@@ -218,7 +218,7 @@ except Exception as e:
 power_key_ok = False
 
 try:
-    power_key = DigitalInputDevice(power_key_pin, pull_up=True, bounce_time=0.1)
+    power_key = Button(power_key_pin)
     power_key_ok = True
     log('power_key init success')
 except Exception as e:
@@ -423,8 +423,7 @@ def main():
             screen_always_on = True
             oled.on()
         else:
-            if power_key.value == 0:
-                log("POWERKEY IS 0")
+            if power_key.value == 1:
                 # screen on
                 if oled_ok and oled_stat == False:
                     oled.on()
@@ -449,7 +448,7 @@ def main():
                         oled.image(image)
                         oled.display()
                     #
-                    while power_key.value == 0:
+                    while power_key.value == 1:
                         pass
                     log("POWER OFF")
                     #
@@ -489,6 +488,7 @@ if __name__ == "__main__":
         log(f'error\n {e}')
     finally:
         exit_handler()
+
 
 
 
